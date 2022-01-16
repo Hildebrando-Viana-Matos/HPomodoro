@@ -43,6 +43,13 @@ a {
 
 button {
   cursor: pointer;
+  border: none;
+  outline: none;
+  transition: filter 400ms;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
 }
 
 .container {
