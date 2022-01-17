@@ -21,8 +21,17 @@ export function Login() {
             Seja bem-vindo(a) a nossa plataforma de foco em estudos, trabalho e
             entre outras atividades usando a técnica de Pomodoro!
           </p>
-          <ButtonLogin plataform="Google" color="#6C5CE7" />
-          <ButtonLogin plataform="GitHub" color="#171515" />
+          <ButtonLogin
+            plataform="Google"
+            color="#6C5CE7"
+            text="Fazer Login com o Google"
+          />
+          <ButtonLogin
+            plataform="GitHub"
+            color="#171515"
+            text="Fazer Login com o GitHub"
+          />
+          <ButtonLogin color="#636e72" text="Entrar sem Login" />
         </div>
       </div>
     </div>

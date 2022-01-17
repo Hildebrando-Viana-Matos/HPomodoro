@@ -1,0 +1,135 @@
+.barXP {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  span {
+    color: var(--gray_dark);
+  }
+
+  .bar {
+    position: relative;
+    width: 80%;
+    height: 4px;
+    background: var(--gray_light);
+    border-radius: 5px;
+
+    .ocupBar {
+      width: 50%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: var(--blue);
+      border-radius: 5px;
+      z-index: 999;
+    }
+  }
+}
+
+.mainClock {
+  margin: 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  .contentClock {
+    width: 400px;
+    height: 400px;
+    position: relative;
+    border-radius: 250px;
+    border: 5px solid var(--blue);
+
+    .clock {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      h1 {
+        font-size: 7rem;
+        font-weight: 600;
+        color: var(--blue);
+      }
+    }
+  }
+
+  .actions {
+    width: 50%;
+
+    .profile {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      margin-bottom: 2rem;
+
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 40px;
+      }
+
+      .descriptionAndLevel {
+        h2 {
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--blue_dark);
+        }
+
+        .contentLevel {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 0.6rem;
+
+          img.up {
+            width: 15px;
+            height: auto;
+          }
+
+          span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray_dark);
+          }
+        }
+      }
+    }
+
+    .desafios {
+      margin: 2rem 0;
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: var(--gray_dark);
+
+        span {
+          font-weight: 600;
+          color: var(--blue);
+        }
+      }
+    }
+
+    button.start {
+      width: 100%;
+      padding: 2rem 1rem;
+      background: var(--blue);
+      color: var(--white);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+
+      span {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+    }
+  }
+}

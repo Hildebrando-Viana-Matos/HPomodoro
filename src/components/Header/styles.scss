@@ -1,0 +1,25 @@
+header {
+  width: 5%;
+  background: var(--blue);
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 2rem 0;
+  color: var(--white);
+
+  .menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 2rem;
+
+    a {
+      color: var(--white);
+      text-decoration: none;
+    }
+  }
+}
