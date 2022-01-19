@@ -11,7 +11,7 @@ type ButtonLoginProps = {
 
 export function ButtonLogin(props: ButtonLoginProps) {
   return (
-    <button className="login" style={{ color: props.color }}>
+    <button className="authButton" style={{ color: props.color }}>
       {props.plataform === "GitHub" && <FiGithub size={30} />}
       {props.plataform === "Google" && <FaGoogle size={30} />}
       {props.plataform === undefined && <FiUserX size={30} />}
