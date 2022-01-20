@@ -5,8 +5,11 @@ import { useState } from "react";
 import levelImg from "../assets/images/up.svg";
 
 // Components
-import { FiCheck, FiPlay, FiTrash } from "react-icons/fi";
 import { Header } from "../components/Header";
+import { TaskList } from "../components/TaskList";
+
+// Icons
+import { FiCheck, FiPlay, FiTrash } from "react-icons/fi";
 
 // Styles
 import "../styles/clock.scss";
@@ -94,32 +97,7 @@ export function Clock() {
             </button>
           </div>
 
-          <div className="toDoList">
-            <h1>To Do List</h1>
-            <form>
-              <input type="text" placeholder="Digite uma nova Task" />
-              <button type="submit">
-                <span>Adicionar</span>
-                <FiCheck size={30} />
-              </button>
-            </form>
-
-            <ul>
-              <li>
-                <div className="completedTask">
-                  <label className="checkbox-container">
-                    <input type="checkbox" readOnly />
-                    <span className="checkmark"></span>
-                  </label>
-                  <p>Teste de task para a aplicação</p>
-                </div>
-
-                <button type="button" data-testid="remove-task-button">
-                  <FiTrash size={30} />
-                </button>
-              </li>
-            </ul>
-          </div>
+          <TaskList />
         </div>
       </main>
     </div>
