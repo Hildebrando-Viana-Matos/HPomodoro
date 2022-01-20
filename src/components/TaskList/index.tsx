@@ -66,26 +66,30 @@ export function TaskList() {
 
       <ul>
         {tasks.map((task) => {
-          <li key={task.id}>
-            <div
-              className={`completedTask ${task.isComplete ? "completed" : ""}`}
-            >
-              <label className="checkbox-container">
-                <input
-                  type="checkbox"
-                  readOnly
-                  checked={task.isComplete}
-                  onClick={() => handleToggleTaskCompletion(task.id)}
-                />
-                <span className="checkmark"></span>
-              </label>
-              <p>{task.title}</p>
-            </div>
+          return (
+            <li key={task.id}>
+              <div
+                className={`completedTask ${
+                  task.isComplete ? "completed" : ""
+                }`}
+              >
+                <label className="checkbox-container">
+                  <input
+                    type="checkbox"
+                    readOnly
+                    checked={task.isComplete}
+                    onClick={() => handleToggleTaskCompletion(task.id)}
+                  />
+                  <span className="checkmark"></span>
+                </label>
+                <p>{task.title}</p>
+              </div>
 
-            <button type="button" onClick={() => handleRemoveTask(task.id)}>
-              <FiTrash size={30} />
-            </button>
-          </li>;
+              <button type="button" onClick={() => handleRemoveTask(task.id)}>
+                <FiTrash size={30} />
+              </button>
+            </li>
+          );
         })}
       </ul>
     </div>
