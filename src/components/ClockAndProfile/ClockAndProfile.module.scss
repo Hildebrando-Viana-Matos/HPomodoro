@@ -1,32 +1,4 @@
-.barXP {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-
-  span {
-    color: var(--gray_dark);
-  }
-
-  .bar {
-    position: relative;
-    width: 80%;
-    height: 4px;
-    background: var(--gray_light);
-    border-radius: 5px;
-
-    .ocupBar {
-      width: 0%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: var(--blue);
-      border-radius: 5px;
-      z-index: 999;
-    }
-  }
-}
+@import "../../styles/themes/index.scss";
 
 .mainClock {
   margin: 4rem 0;
@@ -40,7 +12,9 @@
     height: 400px;
     position: relative;
     border-radius: 250px;
-    border: 5px solid var(--blue);
+    border-width: 5px;
+    border-style: solid;
+    @include themify("border-color", "mainColor");
 
     .clock {
       position: absolute;
@@ -49,9 +23,9 @@
       transform: translate(-50%, -50%);
 
       h1 {
+        @include themify("color", "mainColor");
         font-size: 7rem;
         font-weight: 600;
-        color: var(--blue);
       }
     }
   }
@@ -110,7 +84,7 @@
 
         span {
           font-weight: 600;
-          color: var(--blue);
+          @include themify("color", "mainColor");
         }
       }
     }
@@ -118,7 +92,7 @@
     button.start {
       width: 100%;
       padding: 2rem 1rem;
-      background: var(--blue);
+      @include themify("background", "mainColor");
       color: var(--white);
       border-radius: 5px;
       display: flex;
@@ -131,46 +105,5 @@
         font-weight: 600;
       }
     }
-  }
-}
-
-.changeClockState {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  button {
-    width: calc(90% / 3);
-    padding: 1rem 2rem;
-    background: var(--white);
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: var(--gray_light);
-  }
-
-  button.selectedPomodoro {
-    font-weight: 600;
-    background: var(--blue);
-    color: var(--white);
-  }
-
-  button.selectedShortBreak {
-    font-weight: 600;
-    background: var(--red);
-    color: var(--white);
-  }
-
-  button.selectedLongBreak {
-    font-weight: 600;
-    background: var(--green_light);
-    color: var(--white);
-  }
-
-  &:first-child {
-    border-radius: 5px;
-  }
-
-  &:last-child {
-    border-radius: 5px;
   }
 }

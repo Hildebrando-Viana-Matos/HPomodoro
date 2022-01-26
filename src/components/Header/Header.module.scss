@@ -1,6 +1,8 @@
-header {
+@import "../../styles/themes/index.scss";
+
+.header {
   width: 5%;
-  background: var(--blue);
+  @include themify("background", "mainColor");
   height: 100vh;
   position: fixed;
   display: flex;

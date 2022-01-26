@@ -1,0 +1,17 @@
+@import "./pomodoro.scss";
+@import "./shortBreak.scss";
+@import "./longBreak.scss";
+
+$themes: (
+  pomodoro: $pomodoro,
+  shortBreak: $shortBreak,
+  longBreak: $longBreak,
+);
+
+@mixin themify($property, $key) {
+  @each $theme, $color in $themes {
+    &.#{$theme} {
+      #{$property}: map-get($color, $key);
+    }
+  }
+}

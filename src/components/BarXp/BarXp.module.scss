@@ -1,0 +1,31 @@
+@import "../../styles/themes/index.scss";
+
+.barXP {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  span {
+    color: var(--gray_dark);
+  }
+
+  .bar {
+    position: relative;
+    width: 80%;
+    height: 4px;
+    background: var(--gray_light);
+    border-radius: 5px;
+
+    .ocupBar {
+      width: 0%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include themify("background", "mainColor");
+      border-radius: 5px;
+      z-index: 999;
+    }
+  }
+}

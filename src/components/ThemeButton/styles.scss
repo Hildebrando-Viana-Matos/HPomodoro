@@ -1,0 +1,40 @@
+.changeClockState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: calc(90% / 3);
+    padding: 1rem 2rem;
+    background: var(--white);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--gray_light);
+  }
+
+  button.selectedPomodoro {
+    font-weight: 600;
+    background: var(--blue);
+    color: var(--white);
+  }
+
+  button.selectedShortBreak {
+    font-weight: 600;
+    background: var(--red);
+    color: var(--white);
+  }
+
+  button.selectedLongBreak {
+    font-weight: 600;
+    background: var(--green_light);
+    color: var(--white);
+  }
+
+  &:first-child {
+    border-radius: 5px;
+  }
+
+  &:last-child {
+    border-radius: 5px;
+  }
+}

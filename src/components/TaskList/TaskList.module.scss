@@ -1,3 +1,5 @@
+@import "../../styles/themes/index.scss";
+
 .toDoList {
   margin: 4rem 0;
 
@@ -33,8 +35,9 @@
       justify-content: center;
       gap: 0.8rem;
       width: 30%;
-      background: var(--blue);
+      @include themify("background", "mainColor");
       color: var(--white);
+
       height: 100%;
       border-radius: 0 5px 5px 0;
       font-size: 1.25rem;
@@ -50,6 +53,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: var(--white);
       border-bottom: 1px solid var(--gray_dark);
       padding: 2rem 0;
 
@@ -68,11 +72,11 @@
 
         &.completed {
           p {
-            color: var(--blue);
+            @include themify("color", "mainColor");
           }
         }
 
-        .checkbox-container {
+        .checkboxContainer {
           display: block;
           position: relative;
           padding-left: 14px;
@@ -87,7 +91,7 @@
 
             &:checked {
               & ~ .checkmark {
-                background-color: var(--blue);
+                @include themify("background", "mainColor");
               }
 
               & ~ .checkmark:after {
@@ -102,7 +106,7 @@
             left: 0;
             width: 32px;
             height: 32px;
-            background-color: var(--white);
+            background: var(--white);
             border-radius: 5px;
 
             &:after {
@@ -113,7 +117,8 @@
               top: 6px;
               width: 6px;
               height: 12px;
-              border: solid white;
+              border-style: solid;
+              border: 1px solid var(--white);
               border-width: 0 2px 2px 0;
               transform: rotate(45deg);
             }

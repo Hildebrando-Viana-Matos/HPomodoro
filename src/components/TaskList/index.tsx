@@ -1,11 +1,14 @@
 // React
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 // Icons
 import { FiCheck, FiTrash } from "react-icons/fi";
 
+// Context
+import { ThemeContext } from "../../contexts/ThemeContext";
+
 // Styles
-import "./styles.scss";
+import styles from "./TaskList.module.scss";
 
 // Types
 interface Task {
@@ -17,6 +20,7 @@ interface Task {
 export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const { globalTheme } = useContext(ThemeContext);
 
   function handleCreateNewTask() {
     if (!newTaskTitle) return;
@@ -49,16 +53,20 @@ export function TaskList() {
   }
 
   return (
-    <div className="toDoList">
+    <div className={styles.toDoList}>
       <h1>To Do List</h1>
-      <div className="formTask">
+      <div className={styles.formTask}>
         <input
           type="text"
           placeholder="Digite uma nova Task"
           onChange={(e) => setNewTaskTitle(e.target.value)}
           value={newTaskTitle}
         />
-        <button type="submit" onClick={handleCreateNewTask}>
+        <button
+          type="submit"
+          onClick={handleCreateNewTask}
+          className={styles[globalTheme]}
+        >
           <span>Adicionar</span>
           <FiCheck size={30} />
         </button>
@@ -69,20 +77,22 @@ export function TaskList() {
           return (
             <li key={task.id}>
               <div
-                className={`completedTask ${
-                  task.isComplete ? "completed" : ""
+                className={`${styles.completedTask} ${
+                  task.isComplete ? styles.completed : ""
                 }`}
               >
-                <label className="checkbox-container">
+                <label className={styles.checkboxContainer}>
                   <input
                     type="checkbox"
                     readOnly
                     checked={task.isComplete}
                     onClick={() => handleToggleTaskCompletion(task.id)}
                   />
-                  <span className="checkmark"></span>
+                  <span
+                    className={`${styles.checkmark} ${styles[globalTheme]}`}
+                  ></span>
                 </label>
-                <p>{task.title}</p>
+                <p className={styles[globalTheme]}>{task.title}</p>
               </div>
 
               <button type="button" onClick={() => handleRemoveTask(task.id)}>
