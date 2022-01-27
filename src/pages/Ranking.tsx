@@ -1,5 +1,9 @@
 // Components
 import { Header } from "../components/Header";
+import { Table } from "../components/Table";
+
+//Styles
+import "../styles/ranking.scss";
 
 export function Ranking() {
   return (
@@ -7,7 +11,9 @@ export function Ranking() {
       <Header />
       <main>
         <div className="container">
-          <h1>Hello</h1>
+          <h2>Ranking dos focados</h2>
+
+          <Table />
         </div>
       </main>
     </div>

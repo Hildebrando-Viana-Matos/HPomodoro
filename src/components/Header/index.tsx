@@ -20,7 +20,7 @@ export function Header() {
       <FiClock size={30} />
 
       <div className={styles.menu}>
-        <Link to="/pomodoro">
+        <Link to="/">
           <FiHome size={30} />
         </Link>
         <Link to="/ranking">
