@@ -10,11 +10,11 @@ import {
 } from "../../contexts/ThemeContext";
 
 // Styles
-import "./styles.scss";
+import styles from "./ThemeButton.module.scss";
 
 export function ThemeButton() {
-  const [stateTime, setStateTime] = useState("");
-  const { setGlobalTheme } = useContext(ThemeContext);
+  const [stateTime, setStateTime] = useState("pomodoro");
+  const { globalTheme, setGlobalTheme } = useContext(ThemeContext);
 
   function handleChangeTimeState(stateName: string) {
     if (stateName === "pomodoro") {
@@ -31,22 +31,22 @@ export function ThemeButton() {
     }
   }
   return (
-    <div className="changeClockState">
+    <div className={styles.changeClockState}>
       <button
         onClick={() => handleChangeTimeState("pomodoro")}
-        className={stateTime === "pomodoro" ? "selectedPomodoro" : ""}
+        className={globalTheme === "pomodoro" ? styles[globalTheme] : ""}
       >
         Pomodoro
       </button>
       <button
         onClick={() => handleChangeTimeState("shortBreak")}
-        className={stateTime === "shortBreak" ? "selectedShortBreak" : ""}
+        className={globalTheme === "shortBreak" ? styles[globalTheme] : ""}
       >
         Short Break
       </button>
       <button
         onClick={() => handleChangeTimeState("longBreak")}
-        className={stateTime === "longBreak" ? "selectedLongBreak" : ""}
+        className={globalTheme === "longBreak" ? styles[globalTheme] : ""}
       >
         Long Break
       </button>
