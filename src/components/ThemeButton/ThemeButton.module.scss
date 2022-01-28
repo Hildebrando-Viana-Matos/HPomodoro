@@ -1,0 +1,45 @@
+@import "../../styles/themes/index.scss";
+
+.changeClockState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: calc(90% / 3);
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--gray_light);
+    background: var(--white);
+
+    &.pomodoro {
+      @include themify("background-color", "mainColor");
+      color: var(--white);
+    }
+
+    &.shortBreak {
+      @include themify("background-color", "mainColor");
+      color: var(--white);
+    }
+
+    &.longBreak {
+      @include themify("background-color", "mainColor");
+      color: var(--white);
+    }
+  }
+
+  button.selected {
+    @include themify("background-color", "mainColor");
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  &:first-child {
+    border-radius: 5px;
+  }
+
+  &:last-child {
+    border-radius: 5px;
+  }
+}
