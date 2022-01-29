@@ -1,5 +1,5 @@
 // React
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 // Context
 import {
@@ -13,18 +13,14 @@ import {
 import styles from "./ThemeButton.module.scss";
 
 export function ThemeButton() {
-  const [stateTime, setStateTime] = useState("pomodoro");
   const { globalTheme, setGlobalTheme } = useContext(ThemeContext);
 
   function handleChangeTimeState(stateName: string) {
     if (stateName === "pomodoro") {
-      setStateTime("pomodoro");
       setGlobalTheme(POMODORO_THEME);
     } else if (stateName === "shortBreak") {
-      setStateTime("shortBreak");
       setGlobalTheme(SHORT_BREAK_THEME);
     } else if (stateName === "longBreak") {
-      setStateTime("longBreak");
       setGlobalTheme(LONG_BREAK_THEME);
     } else {
       return;

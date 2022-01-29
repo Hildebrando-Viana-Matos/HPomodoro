@@ -1,18 +1,24 @@
-table {
+.ranking {
+  display: block;
   width: 100%;
-  margin: 2rem 0;
-  border: none;
-  border-spacing: 0 0.5rem;
+  margin: 2rem auto;
+  overflow: auto;
 
-  thead {
-    text-align: left;
+  table {
+    width: 100%;
+    border: none;
+    border-spacing: 0 0.5rem;
 
-    th {
-      font-weight: bold;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--gray_dark);
-      opacity: 0.5;
+    thead {
+      text-align: left;
+
+      th {
+        font-weight: bold;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: var(--gray_dark);
+        opacity: 0.5;
+      }
     }
   }
 }

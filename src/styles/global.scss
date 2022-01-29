@@ -78,4 +78,21 @@ h1 {
       margin: 2rem auto;
     }
   }
+
+  @media (max-width: 800px) {
+    & {
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      main {
+        position: relative;
+        width: 100%;
+
+        .container {
+          margin: 1rem auto;
+        }
+      }
+    }
+  }
 }

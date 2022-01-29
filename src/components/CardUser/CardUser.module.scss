@@ -12,12 +12,16 @@ tr.card {
     border-right: 4px solid var(--background);
     text-align: center;
     vertical-align: middle;
+
+    @media (max-width: 800px) {
+      padding: 2rem;
+    }
   }
 
   td.profile {
     text-align: left;
     vertical-align: middle;
-    padding: 0 1rem 0;
+    padding: 0 1rem 0 1rem;
 
     .contentProfileTable {
       display: flex;
@@ -64,6 +68,7 @@ tr.card {
     font-size: 1rem;
     font-weight: 500;
     color: var(--gray_dark);
+    padding: 0 1rem;
 
     b {
       @include themify("color", "mainColor");

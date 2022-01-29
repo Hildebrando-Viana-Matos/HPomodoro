@@ -24,4 +24,23 @@
       text-decoration: none;
     }
   }
+
+  @media (max-width: 800px) {
+    & {
+      width: 100%;
+      height: auto;
+      justify-content: space-around;
+      flex-direction: row;
+      gap: 1rem;
+      bottom: 0;
+      right: 0;
+      z-index: 2;
+
+      .menu {
+        justify-content: center;
+        gap: 1rem;
+        flex-direction: row;
+      }
+    }
+  }
 }

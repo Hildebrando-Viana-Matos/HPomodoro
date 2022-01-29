@@ -3,6 +3,10 @@
 .toDoList {
   margin: 4rem 0;
 
+  @media (max-width: 800px) {
+    margin-bottom: 15rem;
+  }
+
   h1 {
     font-size: 4rem;
     font-weight: 600;
@@ -15,6 +19,12 @@
     justify-content: center;
     height: 90px;
 
+    @media (max-width: 600px) {
+      flex-direction: column;
+      height: auto;
+      gap: 1rem;
+    }
+
     input[type="text"] {
       width: 70%;
       height: 100%;
@@ -23,6 +33,12 @@
       border-radius: 5px 0 0 5px;
       border: 0;
       outline: 0;
+
+      @media (max-width: 600px) {
+        width: 100%;
+        height: 90px;
+        border-radius: 5px;
+      }
 
       &::placeholder {
         color: var(--gray_dark);
@@ -42,6 +58,12 @@
       border-radius: 0 5px 5px 0;
       font-size: 1.25rem;
       font-weight: 600;
+
+      @media (max-width: 600px) {
+        width: 100%;
+        height: 90px;
+        border-radius: 5px;
+      }
     }
   }
 
