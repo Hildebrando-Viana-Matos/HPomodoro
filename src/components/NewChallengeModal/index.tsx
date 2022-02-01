@@ -35,7 +35,7 @@ export function NewChallengeModal({
       overlayClassName="modalOverlay"
       className="modal"
     >
-      <button className={styles.closeModal} onClick={onRequestClose}>
+      <button className="closeModal" onClick={onRequestClose}>
         <FiX />
       </button>
       <img src={GokuImage} alt="Goku Image Challenge" />

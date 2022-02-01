@@ -121,4 +121,17 @@ h1 {
   &:focus {
     outline: 0;
   }
+
+  .closeModal {
+    background: transparent;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+
+    svg {
+      width: 30px;
+      height: 30px;
+      color: var(--gray_dark);
+    }
+  }
 }

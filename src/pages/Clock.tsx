@@ -8,6 +8,7 @@ import { ThemeButton } from "../components/ThemeButton";
 import { BarXp } from "../components/BarXp";
 import { TaskList } from "../components/TaskList";
 import { NewChallengeModal } from "../components/NewChallengeModal";
+import { NewLevelModal } from "../components/NewLevelModal";
 
 export function Clock() {
   const [isNewChallengeOpen, setIsNewChallengeOpen] = useState(false);
@@ -34,6 +35,10 @@ export function Clock() {
           <TaskList />
 
           <NewChallengeModal
+            isOpen={isNewChallengeOpen}
+            onRequestClose={handleCloseNewChallenge}
+          />
+          <NewLevelModal
             isOpen={isNewChallengeOpen}
             onRequestClose={handleCloseNewChallenge}
           />
