@@ -41,7 +41,7 @@ export function Header() {
         </Link>
       </div>
 
-      <FiLogOut onClick={handleSignOut} size={30} />
+      <FiLogOut className={styles.signOut} onClick={handleSignOut} size={30} />
     </header>
   );
 }

@@ -25,6 +25,15 @@
     }
   }
 
+  .signOut {
+    cursor: pointer;
+    transition: filter 200ms;
+  }
+
+  .signOut:hover {
+    filter: brightness(0.8);
+  }
+
   @media (max-width: 800px) {
     & {
       width: 100%;
