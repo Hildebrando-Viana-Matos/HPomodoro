@@ -1,11 +1,31 @@
+// React
+import { useContext, useEffect } from "react";
+
+// Context
+import { AuthContext } from "../contexts/AuthContext";
+
+// React Router Dom
+import { useNavigate } from "react-router-dom";
+
 // Styles
 import "../styles/login.scss";
 
 // Images
 import logoHPomodoro from "../assets/images/logo.svg";
+
+// Components
 import { ButtonLogin } from "../components/ButtonLogin";
 
 export function Login() {
+  const { user } = useContext(AuthContext);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate("pomodoro", { replace: true });
+    }
+  }, [user]);
+
   return (
     <div className="contentLogin">
       <div className="banner">
@@ -31,7 +51,6 @@ export function Login() {
             color="#171515"
             text="Fazer Login com o GitHub"
           />
-          <ButtonLogin color="#636e72" text="Entrar sem Login" />
         </div>
       </div>
     </div>

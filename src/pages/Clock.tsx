@@ -1,5 +1,5 @@
 // React
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // Components
 import { Header } from "../components/Header";
@@ -10,8 +10,22 @@ import { TaskList } from "../components/TaskList";
 import { NewChallengeModal } from "../components/NewChallengeModal";
 import { NewLevelModal } from "../components/NewLevelModal";
 
+// Context
+import { AuthContext } from "../contexts/AuthContext";
+
+// React Router Dom
+import { useNavigate } from "react-router-dom";
+
 export function Clock() {
   const [isNewChallengeOpen, setIsNewChallengeOpen] = useState(false);
+  const { user } = useContext(AuthContext);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/", { replace: true });
+    }
+  }, [user]);
 
   function handleOpenNewChallenge() {
     setIsNewChallengeOpen(true);

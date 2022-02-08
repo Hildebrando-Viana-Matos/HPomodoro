@@ -38,7 +38,7 @@ export function NewChallengeModal({
       <button className="closeModal" onClick={onRequestClose}>
         <FiX />
       </button>
-      <img src={GokuImage} alt="Goku Image Challenge" />
+      <img src={GokuImage} alt="Goku Challenge" />
       <h2 className={styles.title}>Novo Desafio</h2>
       <p className={styles[globalTheme]}>Valendo 400px</p>
       <span className={styles.challengeDescription}>

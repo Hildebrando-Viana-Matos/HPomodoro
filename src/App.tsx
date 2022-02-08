@@ -1,4 +1,5 @@
 // Context
+import { AuthContextProvider } from "./contexts/AuthContext";
 import ThemeContextParent from "./contexts/ThemeContext";
 
 // React Router Dom
@@ -13,11 +14,13 @@ function App() {
   return (
     <ThemeContextParent>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Clock />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/ranking" element={<Ranking />} />
-        </Routes>
+        <AuthContextProvider>
+          <Routes>
+            <Route index element={<Login />} />
+            <Route path="/pomodoro" element={<Clock />} />
+            <Route path="/ranking" element={<Ranking />} />
+          </Routes>
+        </AuthContextProvider>
       </BrowserRouter>
     </ThemeContextParent>
   );

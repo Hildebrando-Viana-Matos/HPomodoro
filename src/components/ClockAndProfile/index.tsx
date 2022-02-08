@@ -2,6 +2,7 @@
 import { useContext } from "react";
 
 // Context
+import { AuthContext } from "../../contexts/AuthContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 
 // Images
@@ -14,6 +15,8 @@ import { FiPlay } from "react-icons/fi";
 import styles from "./ClockAndProfile.module.scss";
 
 export function ClockAndProfile() {
+  const { user } = useContext(AuthContext);
+
   const { globalTheme } = useContext(ThemeContext);
   return (
     <div className={styles.mainClock}>
@@ -25,12 +28,9 @@ export function ClockAndProfile() {
 
       <div className={styles.actions}>
         <div className={styles.profile}>
-          <img
-            src="https://github.com/Hildebrando-Viana-Matos.png"
-            alt="Foto de Perfil de Hildebrando Viana Matos"
-          />
+          <img src={user?.avatar} alt={`Foto de Perfil de ${user?.name}`} />
           <div className={styles.descriptionAndLevel}>
-            <h2>Hildebrando Viana Matos</h2>
+            <h2>{user?.name}</h2>
             <div className={styles.contentLevel}>
               <img className={styles.up} src={levelImg} alt="Level Icon" />
               <span>Level 1</span>
