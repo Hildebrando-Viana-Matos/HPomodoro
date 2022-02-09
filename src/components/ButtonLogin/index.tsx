@@ -16,13 +16,15 @@ type ButtonLoginProps = {
 
 export function ButtonLogin(props: ButtonLoginProps) {
   // Importando valores de um contexto
-  const { user, signInWithGoogle } = useAuth();
+  const { user, signInWithGoogle, signInWithGitHub } = useAuth();
 
   async function handleLogin(plataform: any) {
     if (plataform === "Google") {
       if (!user) {
         await signInWithGoogle();
       }
+    } else if (plataform === "GitHub") {
+      await signInWithGitHub();
     }
   }
 

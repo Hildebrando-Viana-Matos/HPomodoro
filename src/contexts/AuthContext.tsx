@@ -11,6 +11,7 @@ type User = {
 type AuthContextType = {
   user: User | undefined;
   signInWithGoogle: () => Promise<void>;
+  signInWithGitHub: () => Promise<void>;
   signOut: () => Promise<void>;
 };
 
@@ -65,7 +66,31 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
       navigate("pomodoro", { replace: true });
     } else {
-      console.log("deu ruim");
+      alert("Error on Sign In with Google");
+    }
+  }
+
+  async function signInWithGitHub() {
+    const provider = new firebase.auth.GithubAuthProvider();
+
+    const result = await auth.signInWithPopup(provider);
+    if (result.user) {
+      const { displayName, photoURL, uid } = result.user;
+
+      if (!displayName || !photoURL) {
+        throw new Error("Missing information from Google Account");
+      }
+
+      setUser({
+        id: uid,
+        name: displayName,
+        avatar: photoURL,
+      });
+      console.log(user);
+
+      navigate("pomodoro", { replace: true });
+    } else {
+      alert("Error on Sign In with Google");
     }
   }
 
@@ -83,7 +108,9 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       });
   }
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle, signOut }}>
+    <AuthContext.Provider
+      value={{ user, signInWithGoogle, signInWithGitHub, signOut }}
+    >
       {props.children}
     </AuthContext.Provider>
   );
