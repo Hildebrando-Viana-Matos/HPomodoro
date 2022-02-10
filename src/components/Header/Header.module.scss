@@ -12,6 +12,11 @@
   padding: 2rem 0;
   color: var(--white);
 
+  img {
+    width: 80%;
+    margin: 0 auto;
+  }
+
   .menu {
     display: flex;
     align-items: center;
@@ -44,6 +49,11 @@
       bottom: 0;
       right: 0;
       z-index: 2;
+
+      img {
+        width: 40px;
+        margin: 0;
+      }
 
       .menu {
         justify-content: center;

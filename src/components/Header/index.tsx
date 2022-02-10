@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // Icons
-import { FiAward, FiClock, FiHome, FiLogOut } from "react-icons/fi";
+import { FiAward, FiHome, FiLogOut } from "react-icons/fi";
 
 // Styles
 import styles from "./Header.module.scss";
@@ -13,6 +13,9 @@ import styles from "./Header.module.scss";
 // Context
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { AuthContext } from "../../contexts/AuthContext";
+
+// Images
+import logoIcon from "../../assets/images/favicon.svg";
 
 export function Header() {
   const { globalTheme } = useContext(ThemeContext);
@@ -30,7 +33,7 @@ export function Header() {
 
   return (
     <header className={`${styles.header} ${styles[globalTheme]}`}>
-      <FiClock size={30} />
+      <img src={logoIcon} alt="Logo Hpomodoro Icon" />
 
       <div className={styles.menu}>
         <Link to="/pomodoro">
