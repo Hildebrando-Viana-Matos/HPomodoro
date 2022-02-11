@@ -4,6 +4,7 @@ import { useContext } from "react";
 // Context
 import { AuthContext } from "../../contexts/AuthContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { CountdownContext } from "../../contexts/CountdownContext";
 
 // Images
 import levelImg from "../../assets/images/up.svg";
@@ -18,11 +19,30 @@ export function ClockAndProfile() {
   const { user } = useContext(AuthContext);
 
   const { globalTheme } = useContext(ThemeContext);
+
+  const {
+    minutes,
+    seconds,
+    hasFinished,
+    isActive,
+    startCountdown,
+    resertCountdown,
+  } = useContext(CountdownContext);
+
+  const [minuteLeft, minuteRight] = String(minutes).padStart(2, "0").split("");
+  const [secondsLeft, secondsRight] = String(seconds)
+    .padStart(2, "0")
+    .split("");
+
   return (
     <div className={styles.mainClock}>
       <div className={`${styles.contentClock} ${styles[globalTheme]}`}>
         <div className={styles.clock}>
-          <h1 className={styles[globalTheme]}>25:00</h1>
+          <h1 className={styles[globalTheme]}>
+            {minuteLeft}
+            {minuteRight}:{secondsLeft}
+            {secondsRight}
+          </h1>
         </div>
       </div>
 
@@ -45,10 +65,32 @@ export function ClockAndProfile() {
           </h2>
         </div>
 
-        <button className={`${styles.start} ${styles[globalTheme]}`}>
-          <span className={styles[globalTheme]}>Começar</span>
-          <FiPlay size={30} />
-        </button>
+        {hasFinished ? (
+          <button disabled className={`${styles.start} ${styles[globalTheme]}`}>
+            <span className={styles[globalTheme]}>Hora do desafio</span>
+            <FiPlay size={30} />
+          </button>
+        ) : (
+          <>
+            {isActive ? (
+              <button
+                onClick={resertCountdown}
+                className={`${styles.start} ${styles[globalTheme]}`}
+              >
+                <span className={styles[globalTheme]}>Parar</span>
+                <FiPlay size={30} />
+              </button>
+            ) : (
+              <button
+                onClick={startCountdown}
+                className={`${styles.start} ${styles[globalTheme]}`}
+              >
+                <span className={styles[globalTheme]}>Começar</span>
+                <FiPlay size={30} />
+              </button>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

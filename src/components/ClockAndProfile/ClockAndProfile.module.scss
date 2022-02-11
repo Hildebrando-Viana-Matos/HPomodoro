@@ -29,6 +29,8 @@
       transform: translate(-50%, -50%);
 
       h1 {
+        width: 100%;
+        margin: 0 auto;
         @include themify("color", "mainColor");
         font-size: 7rem;
         font-weight: 600;

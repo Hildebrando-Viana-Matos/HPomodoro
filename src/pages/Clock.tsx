@@ -12,6 +12,7 @@ import { NewLevelModal } from "../components/NewLevelModal";
 
 // Context
 import { AuthContext } from "../contexts/AuthContext";
+import { CountdownProvider } from "../contexts/CountdownContext";
 
 // React Router Dom
 import { useNavigate } from "react-router-dom";
@@ -42,7 +43,9 @@ export function Clock() {
         <div className="container">
           <BarXp />
 
-          <ClockAndProfile />
+          <CountdownProvider>
+            <ClockAndProfile />
+          </CountdownProvider>
 
           <ThemeButton />
 
