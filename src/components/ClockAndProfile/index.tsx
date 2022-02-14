@@ -41,11 +41,19 @@ export function ClockAndProfile() {
     <div className={styles.mainClock}>
       <div className={`${styles.contentClock} ${styles[globalTheme]}`}>
         <div className={styles.clock}>
-          <h1 className={styles[globalTheme]}>
-            {minuteLeft}
-            {minuteRight}:{secondsLeft}
-            {secondsRight}
-          </h1>
+          <div className={`${styles.clockNumbers} ${styles[globalTheme]}`}>
+            <div>
+              <span>{minuteLeft}</span>
+              <span>{minuteRight}</span>
+            </div>
+            <div className={styles.twoPonts}>
+              <span>:</span>
+            </div>
+            <div>
+              <span>{secondsLeft}</span>
+              <span>{secondsRight}</span>
+            </div>
+          </div>
         </div>
       </div>
 
