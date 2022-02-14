@@ -58,7 +58,7 @@ export function TaskList() {
       <div className={styles.formTask}>
         <input
           type="text"
-          placeholder="Digite uma nova Task"
+          placeholder="Enter a new Task"
           onChange={(e) => setNewTaskTitle(e.target.value)}
           value={newTaskTitle}
         />
@@ -67,7 +67,7 @@ export function TaskList() {
           onClick={handleCreateNewTask}
           className={styles[globalTheme]}
         >
-          <span>Adicionar</span>
+          <span>Add Task</span>
           <FiCheck size={30} />
         </button>
       </div>

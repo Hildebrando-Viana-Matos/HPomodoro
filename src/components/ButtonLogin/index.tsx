@@ -11,7 +11,7 @@ import { useAuth } from "../../hooks/useAuth";
 type ButtonLoginProps = {
   plataform?: "GitHub" | "Google";
   color: string;
-  text: string;
+  text: any;
 };
 
 export function ButtonLogin(props: ButtonLoginProps) {

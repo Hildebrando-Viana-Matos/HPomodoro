@@ -45,7 +45,7 @@ export function CardUser({ position, user }: CardUserProps) {
       </td>
       <td className={styles.challenges}>
         <b className={styles[globalTheme]}>{user.challengesCompleted}</b>{" "}
-        completados
+        completed
       </td>
       <td className={styles.xp}>
         <b className={styles[globalTheme]}>{user.xp}</b> xp

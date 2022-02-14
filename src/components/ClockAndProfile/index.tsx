@@ -16,10 +16,13 @@ import { FiPlay } from "react-icons/fi";
 import styles from "./ClockAndProfile.module.scss";
 
 export function ClockAndProfile() {
+  // User
   const { user } = useContext(AuthContext);
 
+  // Theme
   const { globalTheme } = useContext(ThemeContext);
 
+  // CountdownContext
   const {
     minutes,
     seconds,
@@ -48,7 +51,7 @@ export function ClockAndProfile() {
 
       <div className={styles.actions}>
         <div className={styles.profile}>
-          <img src={user?.avatar} alt={`Foto de Perfil de ${user?.name}`} />
+          <img src={user?.avatar} alt={`${user?.name}'s profile picture`} />
           <div className={styles.descriptionAndLevel}>
             <h2>{user?.name}</h2>
             <div className={styles.contentLevel}>
@@ -60,14 +63,14 @@ export function ClockAndProfile() {
 
         <div className={styles.desafios}>
           <h2>
-            Desafios Completados:{" "}
+            Challenges Completed:{" "}
             <span className={styles[globalTheme]}>08</span>
           </h2>
         </div>
 
         {hasFinished ? (
           <button disabled className={`${styles.start} ${styles[globalTheme]}`}>
-            <span className={styles[globalTheme]}>Hora do desafio</span>
+            <span className={styles[globalTheme]}>Challenge Time</span>
             <FiPlay size={30} />
           </button>
         ) : (
@@ -77,7 +80,7 @@ export function ClockAndProfile() {
                 onClick={resertCountdown}
                 className={`${styles.start} ${styles[globalTheme]}`}
               >
-                <span className={styles[globalTheme]}>Parar</span>
+                <span className={styles[globalTheme]}>Stop now</span>
                 <FiPlay size={30} />
               </button>
             ) : (
@@ -85,7 +88,7 @@ export function ClockAndProfile() {
                 onClick={startCountdown}
                 className={`${styles.start} ${styles[globalTheme]}`}
               >
-                <span className={styles[globalTheme]}>Começar</span>
+                <span className={styles[globalTheme]}>Start now</span>
                 <FiPlay size={30} />
               </button>
             )}

@@ -11,7 +11,7 @@ export function Ranking() {
       <Header />
       <main>
         <div className="container">
-          <h2>Ranking dos focados</h2>
+          <h2>Focused Ranking</h2>
 
           <Table />
         </div>

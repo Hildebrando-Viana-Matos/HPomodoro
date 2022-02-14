@@ -10,10 +10,10 @@ export function Table() {
       <table>
         <thead>
           <tr>
-            <th className="position">Posição</th>
-            <th className="user">Usúario</th>
-            <th className="challenge">Desafios</th>
-            <th className="xp">Experiências</th>
+            <th className="position">Position</th>
+            <th className="user">Users</th>
+            <th className="challenge">Challenges</th>
+            <th className="xp">Experience</th>
           </tr>
         </thead>
         <tbody>

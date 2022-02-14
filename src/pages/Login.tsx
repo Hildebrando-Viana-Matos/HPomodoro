@@ -31,25 +31,25 @@ export function Login() {
       <div className="banner">
         <div className="contentImgGrade">
           <img src={logoHPomodoro} alt="Logo HPomodoro" />
-          <p>Sua plataforma de foco para estudo, trabalho, etc!!</p>
+          <p>Your focus platform for study and work!!</p>
         </div>
       </div>
       <div className="login">
         <div className="content">
-          <h2>Bem-Vindo(a)</h2>
+          <h2>Welcome</h2>
           <p>
-            Seja bem-vindo(a) a nossa plataforma de foco em estudos, trabalho e
-            entre outras atividades usando a técnica de Pomodoro!
+            Welcome to our platform to focus on studies, work and other
+            activities using the Pomodoro technique!
           </p>
           <ButtonLogin
             plataform="Google"
             color="#6C5CE7"
-            text="Fazer Login com o Google"
+            text="Login with Google"
           />
           <ButtonLogin
             plataform="GitHub"
             color="#171515"
-            text="Fazer Login com o GitHub"
+            text="Login with GitHub"
           />
         </div>
       </div>
