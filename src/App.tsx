@@ -16,7 +16,7 @@ function App() {
       <BrowserRouter>
         <AuthContextProvider>
           <Routes>
-            <Route index element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/pomodoro" element={<Clock />} />
             <Route path="/ranking" element={<Ranking />} />
           </Routes>
