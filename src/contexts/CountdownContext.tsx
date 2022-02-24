@@ -1,9 +1,17 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 // Hooks
 import { useTheme } from "../hooks/useTheme";
 
 // Context
+import { ChallengesContext } from "./ChallengesContext";
+
 import {
   POMODORO_THEME,
   SHORT_BREAK_THEME,
@@ -29,6 +37,8 @@ export const CountdownContext = createContext({} as CountdwonContextData);
 let countdownTimeout: NodeJS.Timeout;
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
+  const { startNewChallenge } = useContext(ChallengesContext);
+
   const { globalTheme, setGlobalTheme } = useTheme();
   const [timeState, setTimeState] = useState<string>("pomodoro");
   const [repeatedTimes, setRepeatedTimes] = useState<number>(1);
@@ -82,7 +92,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     } else if (globalTheme === "shortBreak") {
       setTimeState(globalTheme);
       setGlobalTheme(globalTheme);
-      setTime(0.2 * 60);
+      setTime(5 * 60);
     } else if (globalTheme === "longBreak") {
       setTimeState(globalTheme);
       setGlobalTheme(globalTheme);
@@ -109,6 +119,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
           setGlobalTheme(SHORT_BREAK_THEME);
           startShortBreak();
         }
+        startNewChallenge();
       }
     } else if (timeState === "shortBreak") {
       if (isActive && time > 0) {

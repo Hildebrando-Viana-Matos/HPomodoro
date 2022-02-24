@@ -28,14 +28,6 @@ export function Clock() {
     }
   }, [user]);
 
-  function handleOpenNewChallenge() {
-    setIsNewChallengeOpen(true);
-  }
-
-  function handleCloseNewChallenge() {
-    setIsNewChallengeOpen(false);
-  }
-
   return (
     <div className="contentScreens">
       <Header />
@@ -50,15 +42,6 @@ export function Clock() {
           <ThemeButton />
 
           <TaskList />
-
-          <NewChallengeModal
-            isOpen={isNewChallengeOpen}
-            onRequestClose={handleCloseNewChallenge}
-          />
-          <NewLevelModal
-            isOpen={isNewChallengeOpen}
-            onRequestClose={handleCloseNewChallenge}
-          />
         </div>
       </main>
     </div>

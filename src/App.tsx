@@ -1,4 +1,5 @@
 // Context
+import { ChallengesProvider } from "./contexts/ChallengesContext";
 import { AuthContextProvider } from "./contexts/AuthContext";
 import ThemeContextParent from "./contexts/ThemeContext";
 
@@ -15,11 +16,17 @@ function App() {
     <ThemeContextParent>
       <BrowserRouter>
         <AuthContextProvider>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/pomodoro" element={<Clock />} />
-            <Route path="/ranking" element={<Ranking />} />
-          </Routes>
+          <ChallengesProvider
+            level={1}
+            currentExperience={1}
+            challengesCompleted={3}
+          >
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/pomodoro" element={<Clock />} />
+              <Route path="/ranking" element={<Ranking />} />
+            </Routes>
+          </ChallengesProvider>
         </AuthContextProvider>
       </BrowserRouter>
     </ThemeContextParent>

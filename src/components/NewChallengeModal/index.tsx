@@ -16,16 +16,29 @@ import { FiX } from "react-icons/fi";
 // Context
 import { ThemeContext } from "../../contexts/ThemeContext";
 
+// Hooks
+import { useAuth } from "../../hooks/useAuth";
+
 // Types
+type Challenge = {
+  language: "ptBr" | "en";
+  type: "body" | "eye";
+  description: string;
+  amount: number;
+};
+
 type NewChallengeModalProps = {
   isOpen: boolean;
   onRequestClose: () => void;
+  content: Challenge | any;
 };
 
 export function NewChallengeModal({
   isOpen,
   onRequestClose,
+  content,
 }: NewChallengeModalProps) {
+  const { user } = useAuth();
   const { globalTheme } = useContext(ThemeContext);
 
   return (
@@ -40,14 +53,15 @@ export function NewChallengeModal({
       </button>
       <img src={GokuImage} alt="Goku Challenge" />
       <h2 className={styles.title}>Novo Desafio</h2>
-      <p className={styles[globalTheme]}>Valendo 400px</p>
+      <p className={styles[globalTheme]}>Valendo {content.amount}px</p>
       <span className={styles.challengeDescription}>
-        É agora Diegão, bora lá meu parça. Caminhe por 3 minutos e estique suas
-        pernas pra você ficar saudável.
+        Vamos {user?.name}!!! {content.description}
       </span>
 
       <div className={styles.buttonsContainer}>
-        <button className={styles.failed}>Falhei :(</button>
+        <button className={styles.failed} onClick={onRequestClose}>
+          Falhei :(
+        </button>
         <button className={styles.achieved}>Consegui</button>
       </div>
     </Modal>
