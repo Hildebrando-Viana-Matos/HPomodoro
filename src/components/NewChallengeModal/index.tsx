@@ -30,12 +30,14 @@ type Challenge = {
 type NewChallengeModalProps = {
   isOpen: boolean;
   onRequestClose: () => void;
+  completeChallenge: () => void;
   content: Challenge | any;
 };
 
 export function NewChallengeModal({
   isOpen,
   onRequestClose,
+  completeChallenge,
   content,
 }: NewChallengeModalProps) {
   const { user } = useAuth();
@@ -45,6 +47,7 @@ export function NewChallengeModal({
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
+      ariaHideApp={false}
       overlayClassName="modalOverlay"
       className="modal"
     >
@@ -62,7 +65,9 @@ export function NewChallengeModal({
         <button className={styles.failed} onClick={onRequestClose}>
           Falhei :(
         </button>
-        <button className={styles.achieved}>Consegui</button>
+        <button className={styles.achieved} onClick={completeChallenge}>
+          Consegui
+        </button>
       </div>
     </Modal>
   );

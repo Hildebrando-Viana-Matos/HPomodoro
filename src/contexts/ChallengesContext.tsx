@@ -1,6 +1,16 @@
+// React
 import { createContext, useState, ReactNode, useEffect } from "react";
+
+// Modals
 import { NewChallengeModal } from "../components/NewChallengeModal";
 import { NewLevelModal } from "../components/NewLevelModal";
+
+// Hooks
+import { useAuth } from "../hooks/useAuth";
+import { useUser } from "../hooks/useUser";
+
+// Firebase
+import { database } from "../services/firebase";
 
 type Challenge = {
   language: "ptBr" | "en";
@@ -24,9 +34,6 @@ interface ChallengesContextData {
 
 interface ChallengesProviderProps {
   children: ReactNode;
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
 }
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
@@ -35,27 +42,57 @@ export function ChallengesProvider({
   children,
   ...rest
 }: ChallengesProviderProps) {
+  const { user } = useAuth();
+  const { userData, setUserData } = useUser();
+
   const [challenges, setChallenges] = useState<Challenge[]>([]);
 
-  const [level, setLevel] = useState<number>(0);
+  const [level, setLevel] = useState(
+    userData?.levelUser === undefined ? 0 : userData?.levelUser
+  );
   const [currentExperience, setCurrentExperience] = useState(
-    rest.currentExperience
+    userData?.currentExperienceUser === undefined
+      ? 0
+      : userData.currentExperienceUser
   );
   const [challengesCompleted, setChallengesCompleted] = useState(
-    rest.challengesCompleted
+    userData?.challengesCompletedUser === undefined
+      ? 0
+      : userData?.challengesCompletedUser
   );
+
+  // Updating new values
+  useEffect(() => {
+    setLevel(userData?.levelUser === undefined ? 0 : userData?.levelUser);
+    setCurrentExperience(
+      userData?.currentExperienceUser === undefined
+        ? 0
+        : userData.currentExperienceUser
+    );
+    setChallengesCompleted(
+      userData?.challengesCompletedUser === undefined
+        ? 0
+        : userData?.challengesCompletedUser
+    );
+  }, [
+    userData?.levelUser,
+    userData?.currentExperienceUser,
+    userData?.challengesCompletedUser,
+  ]);
+
   const [activeChallenge, setActiveChallenge] = useState(null);
   const [isNewChallengeOpen, setIsNewChallengeOpen] = useState(false);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
+  const [challengeWasCompleted, setChallengeWasCompleted] = useState(false);
 
-  const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
+  const experienceToNextLevel = Math.pow((level + 1) * 6, 2);
 
-  // Solicitando permissão para notification
+  // Requesting permission for use notification
   useEffect(() => {
     Notification.requestPermission();
   }, []);
 
-  // Cathing json data
+  // Catching json data
   useEffect(() => {
     fetch("./challenges.json", {
       headers: {
@@ -66,7 +103,9 @@ export function ChallengesProvider({
       .then((res) => setChallenges(res as Challenge[]));
   }, []);
 
-  useEffect(() => {}, [level, currentExperience, challengesCompleted]);
+  useEffect(() => {
+    handleRegisterNewLevel();
+  }, [challengeWasCompleted]);
 
   function levelUp() {
     setLevel(level + 1);
@@ -87,6 +126,7 @@ export function ChallengesProvider({
 
   function startNewChallenge() {
     handleOpenNewChallenge();
+    setChallengeWasCompleted(false);
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
     const challenge = challenges[randomChallengeIndex];
 
@@ -106,7 +146,7 @@ export function ChallengesProvider({
     handleCloseNewChallenge();
   }
 
-  function completeChallenge() {
+  async function completeChallenge() {
     if (!activeChallenge) return;
 
     const { amount } = activeChallenge;
@@ -114,13 +154,42 @@ export function ChallengesProvider({
     let finalExperience = currentExperience + amount;
 
     if (finalExperience >= experienceToNextLevel) {
-      finalExperience = finalExperience - experienceToNextLevel;
       levelUp();
     }
 
     setCurrentExperience(finalExperience);
-    setActiveChallenge(null);
     setChallengesCompleted(challengesCompleted + 1);
+    setChallengeWasCompleted(true);
+    handleCloseNewChallenge();
+  }
+
+  async function handleRegisterNewLevel() {
+    if (userData?.id) {
+      const newLevelUser = {
+        id: user?.id,
+        name: user?.name,
+        avatar: user?.avatar,
+        levelUser: level,
+        currentExperienceUser: currentExperience,
+        challengesCompletedUser: challengesCompleted,
+      };
+
+      await database.ref(`users/${user?.id}/`).update(newLevelUser);
+
+      setUserData(newLevelUser as any);
+    } else if (!userData?.id) {
+      // Registering new user data
+      const newLevelUser = {
+        id: user?.id,
+        name: user?.name,
+        avatar: user?.avatar,
+        levelUser: level,
+        currentExperienceUser: currentExperience,
+        challengesCompletedUser: challengesCompleted,
+      };
+
+      await database.ref(`users/${user?.id}/`).update(newLevelUser);
+    }
   }
 
   return (
@@ -149,6 +218,7 @@ export function ChallengesProvider({
         <NewChallengeModal
           isOpen={isNewChallengeOpen}
           onRequestClose={handleCloseNewChallenge}
+          completeChallenge={completeChallenge}
           content={activeChallenge}
         />
       )}

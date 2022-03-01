@@ -16,11 +16,7 @@ function App() {
     <ThemeContextParent>
       <BrowserRouter>
         <AuthContextProvider>
-          <ChallengesProvider
-            level={1}
-            currentExperience={1}
-            challengesCompleted={3}
-          >
+          <ChallengesProvider>
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/pomodoro" element={<Clock />} />

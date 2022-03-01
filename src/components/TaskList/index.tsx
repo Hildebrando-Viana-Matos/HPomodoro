@@ -74,7 +74,7 @@ export function TaskList() {
           onChange={(e) => setNewTaskTitle(e.target.value)}
           value={newTaskTitle}
         />
-        <button type="submit" className={styles[globalTheme]}>
+        <button type="submit" autoFocus className={styles[globalTheme]}>
           <span>Add Task</span>
           <FiCheck size={30} />
         </button>

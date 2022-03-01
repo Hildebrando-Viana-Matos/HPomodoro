@@ -2,9 +2,9 @@
 import { useContext } from "react";
 
 // Context
-import { AuthContext } from "../../contexts/AuthContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { CountdownContext } from "../../contexts/CountdownContext";
+import { ChallengesContext } from "../../contexts/ChallengesContext";
 
 // Images
 import levelImg from "../../assets/images/up.svg";
@@ -15,9 +15,17 @@ import { FiPlay } from "react-icons/fi";
 // Styles
 import styles from "./ClockAndProfile.module.scss";
 
+// Hook
+import { useUser } from "../../hooks/useUser";
+import { useAuth } from "../../hooks/useAuth";
+
 export function ClockAndProfile() {
-  // User
-  const { user } = useContext(AuthContext);
+  // User Data
+  const { user } = useAuth();
+  const { userData } = useUser();
+
+  // Challenges Context
+  const { level, challengesCompleted } = useContext(ChallengesContext);
 
   // Theme
   const { globalTheme } = useContext(ThemeContext);
@@ -59,12 +67,12 @@ export function ClockAndProfile() {
 
       <div className={styles.actions}>
         <div className={styles.profile}>
-          <img src={user?.avatar} alt={`${user?.name}'s profile picture`} />
+          <img src={user?.avatar} alt={`${user?.name}'s profile`} />
           <div className={styles.descriptionAndLevel}>
             <h2>{user?.name}</h2>
             <div className={styles.contentLevel}>
               <img className={styles.up} src={levelImg} alt="Level Icon" />
-              <span>Level 1</span>
+              <span>Level {level}</span>
             </div>
           </div>
         </div>
@@ -72,7 +80,7 @@ export function ClockAndProfile() {
         <div className={styles.desafios}>
           <h2>
             Challenges Completed:{" "}
-            <span className={styles[globalTheme]}>08</span>
+            <span className={styles[globalTheme]}>{challengesCompleted}</span>
           </h2>
         </div>
 
