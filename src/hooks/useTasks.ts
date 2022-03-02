@@ -30,8 +30,7 @@ export function useTasks(taskTitle: boolean) {
 
     taskRef.on("value", (tasks) => {
       const databaseTasks = tasks.val();
-      const firebaseTask: FirebaseTask =
-        databaseTasks ?? console.log("deu ruim");
+      const firebaseTask: FirebaseTask = databaseTasks ?? {};
 
       const parsedTask = Object.entries(firebaseTask).map(([key, value]) => {
         return {

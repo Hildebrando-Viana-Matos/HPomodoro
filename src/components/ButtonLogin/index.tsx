@@ -9,7 +9,7 @@ import "./styles.scss";
 import { useAuth } from "../../hooks/useAuth";
 
 type ButtonLoginProps = {
-  plataform?: "GitHub" | "Google";
+  platform?: "GitHub" | "Google";
   color: string;
   text: any;
 };
@@ -18,12 +18,12 @@ export function ButtonLogin(props: ButtonLoginProps) {
   // Importando valores de um contexto
   const { user, signInWithGoogle, signInWithGitHub } = useAuth();
 
-  async function handleLogin(plataform: any) {
-    if (plataform === "Google") {
+  async function handleLogin(platform: any) {
+    if (platform === "Google") {
       if (!user) {
         await signInWithGoogle();
       }
-    } else if (plataform === "GitHub") {
+    } else if (platform === "GitHub") {
       await signInWithGitHub();
     }
   }
@@ -32,10 +32,10 @@ export function ButtonLogin(props: ButtonLoginProps) {
     <button
       className="authButton"
       style={{ color: props.color }}
-      onClick={() => handleLogin(props.plataform)}
+      onClick={() => handleLogin(props.platform)}
     >
-      {props.plataform === "GitHub" && <FiGithub size={30} />}
-      {props.plataform === "Google" && <FaGoogle size={30} />}
+      {props.platform === "GitHub" && <FiGithub size={30} />}
+      {props.platform === "Google" && <FaGoogle size={30} />}
       <span>{props.text}</span>
     </button>
   );

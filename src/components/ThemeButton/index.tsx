@@ -1,6 +1,5 @@
 // React
 import { useContext } from "react";
-import { CountdownContext } from "../../contexts/CountdownContext";
 
 // Context
 import {
@@ -9,6 +8,7 @@ import {
   SHORT_BREAK_THEME,
   LONG_BREAK_THEME,
 } from "../../contexts/ThemeContext";
+import { CountdownContext } from "../../contexts/CountdownContext";
 
 // Styles
 import styles from "./ThemeButton.module.scss";
@@ -27,17 +27,15 @@ export function ThemeButton() {
 
   function handleChangeTimeState(stateName: string) {
     if (stateName === "pomodoro") {
-      // handleChangeTimeStateValue(POMODORO_THEME);
       setGlobalTheme(POMODORO_THEME);
     } else if (stateName === "shortBreak") {
-      // handleChangeTimeStateValue(SHORT_BREAK_THEME);
       setGlobalTheme(SHORT_BREAK_THEME);
     } else if (stateName === "longBreak") {
-      // handleChangeTimeStateValue(LONG_BREAK_THEME);
       setGlobalTheme(LONG_BREAK_THEME);
     } else {
       return;
     }
+    new Audio("/newTime.mp3").play();
   }
   return (
     <div className={styles.changeClockState}>

@@ -42,12 +42,12 @@ export function Login() {
             activities using the Pomodoro technique!
           </p>
           <ButtonLogin
-            plataform="Google"
+            platform="Google"
             color="#6C5CE7"
             text="Login with Google"
           />
           <ButtonLogin
-            plataform="GitHub"
+            platform="GitHub"
             color="#171515"
             text="Login with GitHub"
           />

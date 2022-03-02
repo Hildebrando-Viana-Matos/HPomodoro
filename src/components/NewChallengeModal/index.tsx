@@ -43,6 +43,14 @@ export function NewChallengeModal({
   const { user } = useAuth();
   const { globalTheme } = useContext(ThemeContext);
 
+  function handleSoundButtonClick(typeButton: string) {
+    if (typeButton === "achieved") {
+      new Audio("/sounds/completed.mp3").play();
+    } else if (typeButton === "failed") {
+      new Audio("/sounds/lose.mp3").play();
+    }
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -62,11 +70,23 @@ export function NewChallengeModal({
       </span>
 
       <div className={styles.buttonsContainer}>
-        <button className={styles.failed} onClick={onRequestClose}>
+        <button
+          className={styles.failed}
+          onClick={() => {
+            onRequestClose();
+            handleSoundButtonClick("failed");
+          }}
+        >
           Falhei :(
         </button>
-        <button className={styles.achieved} onClick={completeChallenge}>
-          Consegui
+        <button
+          className={styles.achieved}
+          onClick={() => {
+            completeChallenge();
+            handleSoundButtonClick("achieved");
+          }}
+        >
+          Consegui :)
         </button>
       </div>
     </Modal>

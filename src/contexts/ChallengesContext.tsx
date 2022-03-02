@@ -38,10 +38,7 @@ interface ChallengesProviderProps {
 
 export const ChallengesContext = createContext({} as ChallengesContextData);
 
-export function ChallengesProvider({
-  children,
-  ...rest
-}: ChallengesProviderProps) {
+export function ChallengesProvider({ children }: ChallengesProviderProps) {
   const { user } = useAuth();
   const { userData, setUserData } = useUser();
 
@@ -110,6 +107,7 @@ export function ChallengesProvider({
   function levelUp() {
     setLevel(level + 1);
     setIsLevelUpModalOpen(true);
+    new Audio("/sounds/newLevel.mp3").play();
   }
 
   function closeLevelUpModal() {
@@ -132,7 +130,7 @@ export function ChallengesProvider({
 
     setActiveChallenge(challenge as any);
 
-    new Audio("/notification.mp3").play();
+    new Audio("/sounds/notification.mp3").play();
 
     if (Notification.permission === "granted") {
       new Notification("Novo desafio 🔥", {

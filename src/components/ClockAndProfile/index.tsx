@@ -16,13 +16,11 @@ import { FiPlay } from "react-icons/fi";
 import styles from "./ClockAndProfile.module.scss";
 
 // Hook
-import { useUser } from "../../hooks/useUser";
 import { useAuth } from "../../hooks/useAuth";
 
 export function ClockAndProfile() {
   // User Data
   const { user } = useAuth();
-  const { userData } = useUser();
 
   // Challenges Context
   const { level, challengesCompleted } = useContext(ChallengesContext);
@@ -31,19 +29,21 @@ export function ClockAndProfile() {
   const { globalTheme } = useContext(ThemeContext);
 
   // CountdownContext
-  const {
-    minutes,
-    seconds,
-    hasFinished,
-    isActive,
-    startCountdown,
-    resertCountdown,
-  } = useContext(CountdownContext);
+  const { minutes, seconds, isActive, startCountdown, resertCountdown } =
+    useContext(CountdownContext);
 
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, "0").split("");
   const [secondsLeft, secondsRight] = String(seconds)
     .padStart(2, "0")
     .split("");
+
+  function handleSoundButtonClick(typeButton: string) {
+    if (typeButton === "startButton") {
+      new Audio("/sounds/start.mp3").play();
+    } else if (typeButton === "stopButton") {
+      new Audio("/sounds/stop.mp3").play();
+    }
+  }
 
   return (
     <div className={styles.mainClock}>
@@ -84,31 +84,28 @@ export function ClockAndProfile() {
           </h2>
         </div>
 
-        {hasFinished ? (
-          <button disabled className={`${styles.start} ${styles[globalTheme]}`}>
-            <span className={styles[globalTheme]}>Challenge Time</span>
+        {isActive ? (
+          <button
+            onClick={() => {
+              resertCountdown();
+              handleSoundButtonClick("stopButton");
+            }}
+            className={`${styles.start} ${styles[globalTheme]}`}
+          >
+            <span className={styles[globalTheme]}>Stop now</span>
             <FiPlay size={30} />
           </button>
         ) : (
-          <>
-            {isActive ? (
-              <button
-                onClick={resertCountdown}
-                className={`${styles.start} ${styles[globalTheme]}`}
-              >
-                <span className={styles[globalTheme]}>Stop now</span>
-                <FiPlay size={30} />
-              </button>
-            ) : (
-              <button
-                onClick={startCountdown}
-                className={`${styles.start} ${styles[globalTheme]}`}
-              >
-                <span className={styles[globalTheme]}>Start now</span>
-                <FiPlay size={30} />
-              </button>
-            )}
-          </>
+          <button
+            onClick={() => {
+              startCountdown();
+              handleSoundButtonClick("startButton");
+            }}
+            className={`${styles.start} ${styles[globalTheme]}`}
+          >
+            <span className={styles[globalTheme]}>Start now</span>
+            <FiPlay size={30} />
+          </button>
         )}
       </div>
     </div>

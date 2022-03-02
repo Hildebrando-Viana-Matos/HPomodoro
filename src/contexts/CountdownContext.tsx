@@ -18,10 +18,9 @@ import {
   LONG_BREAK_THEME,
 } from "./ThemeContext";
 
-interface CountdwonContextData {
+interface CountdownData {
   minutes: number;
   seconds: number;
-  hasFinished: boolean;
   isActive: boolean;
   startCountdown: () => void;
   resertCountdown: () => void;
@@ -32,7 +31,7 @@ interface CountdownProviderProps {
   children: ReactNode;
 }
 
-export const CountdownContext = createContext({} as CountdwonContextData);
+export const CountdownContext = createContext({} as CountdownData);
 
 let countdownTimeout: NodeJS.Timeout;
 
@@ -46,7 +45,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const [time, setTime] = useState(0.1 * 60);
 
   const [isActive, setIsActive] = useState(false);
-  const [hasFinished, setHasFinished] = useState(false);
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -114,10 +112,12 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
           setTimeState(LONG_BREAK_THEME);
           setGlobalTheme(LONG_BREAK_THEME);
           startLongBreak();
+          new Audio("/sounds/newTime.mp3").play();
         } else {
           setTimeState(SHORT_BREAK_THEME);
           setGlobalTheme(SHORT_BREAK_THEME);
           startShortBreak();
+          new Audio("/sounds/newTime.mp3").play();
         }
         startNewChallenge();
       }
@@ -131,6 +131,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         setTimeState(POMODORO_THEME);
         setGlobalTheme(POMODORO_THEME);
         startPomodoro();
+        new Audio("/sounds/newTime.mp3").play();
       }
     } else if (timeState === "longBreak") {
       if (isActive && time > 0) {
@@ -142,6 +143,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         setTimeState(POMODORO_THEME);
         setGlobalTheme(POMODORO_THEME);
         startPomodoro();
+        new Audio("/sounds/newTime.mp3").play();
       }
     }
   }, [isActive, time, timeState]);
@@ -168,7 +170,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
       value={{
         minutes,
         seconds,
-        hasFinished,
         isActive,
         startCountdown,
         resertCountdown,

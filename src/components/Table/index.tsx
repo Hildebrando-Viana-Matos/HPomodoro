@@ -4,7 +4,12 @@ import { CardUser } from "../CardUser";
 //Styles
 import "./styles.scss";
 
+// Hooks
+import { useUsers } from "../../hooks/useUsers";
+
 export function Table() {
+  const { usersData } = useUsers();
+  let positionNumber = 0;
   return (
     <div className="ranking">
       <table>
@@ -17,56 +22,22 @@ export function Table() {
           </tr>
         </thead>
         <tbody>
-          <CardUser
-            position={1}
-            user={{
-              avatar: "https://github.com/Hildebrando-Viana-Matos.png",
-              name: "Hildebrando Viana Matos",
-              level: 1,
-              challengesCompleted: 3,
-              xp: 200,
-            }}
-          />
-          <CardUser
-            position={2}
-            user={{
-              avatar: "https://github.com/Hildebrando-Viana-Matos.png",
-              name: "Hildebrando Viana Matos",
-              level: 1,
-              challengesCompleted: 3,
-              xp: 200,
-            }}
-          />
-          <CardUser
-            position={3}
-            user={{
-              avatar: "https://github.com/Hildebrando-Viana-Matos.png",
-              name: "Hildebrando Viana Matos",
-              level: 1,
-              challengesCompleted: 3,
-              xp: 200,
-            }}
-          />
-          <CardUser
-            position={4}
-            user={{
-              avatar: "https://github.com/Hildebrando-Viana-Matos.png",
-              name: "Hildebrando Viana Matos",
-              level: 1,
-              challengesCompleted: 3,
-              xp: 200,
-            }}
-          />
-          <CardUser
-            position={5}
-            user={{
-              avatar: "https://github.com/Hildebrando-Viana-Matos.png",
-              name: "Hildebrando Viana Matos",
-              level: 1,
-              challengesCompleted: 3,
-              xp: 200,
-            }}
-          />
+          {usersData?.map((users) => {
+            positionNumber = positionNumber + 1;
+            return (
+              <CardUser
+                key={users.id}
+                position={positionNumber}
+                user={{
+                  avatar: users.avatar,
+                  name: users.name,
+                  level: users.levelUser,
+                  challengesCompleted: users.challengesCompletedUser,
+                  xp: users.currentExperienceUser,
+                }}
+              />
+            );
+          })}
         </tbody>
       </table>
     </div>

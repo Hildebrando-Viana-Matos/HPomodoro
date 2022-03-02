@@ -35,7 +35,7 @@ export function CardUser({ position, user }: CardUserProps) {
             alt={`Foto de perfil ${user.name}`}
           />
           <div className={styles.profileUser}>
-            <h2>Hildebrando Viana Matos</h2>
+            <h2>{user.name}</h2>
             <div className={styles.contentLevel}>
               <img className={styles.up} src={levelImg} alt="Level Icon" />
               <span>Level {user.level}</span>
