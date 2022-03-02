@@ -1,5 +1,13 @@
+// React
 import { createContext, ReactNode, useEffect, useState } from "react";
+
+// React Dom
 import { useNavigate } from "react-router-dom";
+
+// Hooks
+import { useUser } from "../hooks/useUser";
+
+// Firebase
 import { firebase, auth } from "../services/firebase";
 
 type User = {
@@ -24,6 +32,7 @@ export const AuthContext = createContext({} as AuthContextType);
 export function AuthContextProvider(props: AuthContextProviderProps) {
   let navigate = useNavigate();
   const [user, setUser] = useState<User>();
+  const { setUserData } = useUser();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -100,6 +109,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       .signOut()
       .then(() => {
         setUser(undefined);
+        setUserData(undefined);
 
         navigate("/", { replace: true });
       })
