@@ -18,17 +18,18 @@ import styles from "./ClockAndProfile.module.scss";
 // Hook
 import { useAuth } from "../../hooks/useAuth";
 
+// i18n
+import { useTranslation } from "react-i18next";
+
 export function ClockAndProfile() {
-  // User Data
+  const { t } = useTranslation();
+
   const { user } = useAuth();
 
-  // Challenges Context
   const { level, challengesCompleted } = useContext(ChallengesContext);
 
-  // Theme
   const { globalTheme } = useContext(ThemeContext);
 
-  // CountdownContext
   const { minutes, seconds, isActive, startCountdown, resertCountdown } =
     useContext(CountdownContext);
 
@@ -72,14 +73,16 @@ export function ClockAndProfile() {
             <h2>{user?.name}</h2>
             <div className={styles.contentLevel}>
               <img className={styles.up} src={levelImg} alt="Level Icon" />
-              <span>Level {level}</span>
+              <span>
+                {t("Level")} {level}
+              </span>
             </div>
           </div>
         </div>
 
         <div className={styles.desafios}>
           <h2>
-            Challenges Completed:{" "}
+            {t("Challenges Completed")}:{" "}
             <span className={styles[globalTheme]}>{challengesCompleted}</span>
           </h2>
         </div>
@@ -92,7 +95,7 @@ export function ClockAndProfile() {
             }}
             className={`${styles.start} ${styles[globalTheme]}`}
           >
-            <span className={styles[globalTheme]}>Stop now</span>
+            <span className={styles[globalTheme]}>{t("Stop now")}</span>
             <FiPlay size={30} />
           </button>
         ) : (
@@ -103,7 +106,7 @@ export function ClockAndProfile() {
             }}
             className={`${styles.start} ${styles[globalTheme]}`}
           >
-            <span className={styles[globalTheme]}>Start now</span>
+            <span className={styles[globalTheme]}>{t("Start now")}</span>
             <FiPlay size={30} />
           </button>
         )}

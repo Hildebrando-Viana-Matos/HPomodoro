@@ -19,6 +19,9 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 // Hooks
 import { useAuth } from "../../hooks/useAuth";
 
+// i18n
+import { useTranslation } from "react-i18next";
+
 // Types
 type Challenge = {
   language: "ptBr" | "en";
@@ -40,7 +43,10 @@ export function NewChallengeModal({
   completeChallenge,
   content,
 }: NewChallengeModalProps) {
+  const { t } = useTranslation();
+
   const { user } = useAuth();
+
   const { globalTheme } = useContext(ThemeContext);
 
   function handleSoundButtonClick(typeButton: string) {
@@ -63,10 +69,12 @@ export function NewChallengeModal({
         <FiX />
       </button>
       <img src={GokuImage} alt="Goku Challenge" />
-      <h2 className={styles.title}>Novo Desafio</h2>
-      <p className={styles[globalTheme]}>Valendo {content.amount}px</p>
+      <h2 className={styles.title}>{t("New Challenge")}</h2>
+      <p className={styles[globalTheme]}>
+        {t("Worth")} {content.amount}xp
+      </p>
       <span className={styles.challengeDescription}>
-        Vamos {user?.name}!!! {content.description}
+        {t("Let's go")} {user?.name}!!! {content.description}
       </span>
 
       <div className={styles.buttonsContainer}>
@@ -77,7 +85,7 @@ export function NewChallengeModal({
             handleSoundButtonClick("failed");
           }}
         >
-          Falhei :(
+          {t("I failed")} :(
         </button>
         <button
           className={styles.achieved}
@@ -86,7 +94,7 @@ export function NewChallengeModal({
             handleSoundButtonClick("achieved");
           }}
         >
-          Consegui :)
+          {t("I achieved")} :)
         </button>
       </div>
     </Modal>

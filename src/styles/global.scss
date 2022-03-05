@@ -19,9 +19,22 @@
   font-family: "Inter", sans-serif;
 }
 
+html {
+  @media (max-width: 1080px) {
+    font-size: 93.75%; // 15px
+  }
+  @media (max-width: 720px) {
+    font-size: 87.5%; // 14px
+  }
+  @media (max-width: 500px) {
+    font-size: 81.25%; // 13px
+  }
+}
+
 body {
   background: var(--background);
   color: var(--black);
+  -webkit-font-smoothing: antialiased;
 }
 
 body,
@@ -52,7 +65,7 @@ button {
 }
 
 .container {
-  width: unquote("min(900px, 90%)");
+  width: unquote("min(90vw, 900px)");
   margin: 2rem auto;
 }
 

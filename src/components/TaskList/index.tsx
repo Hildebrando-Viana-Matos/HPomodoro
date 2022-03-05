@@ -12,14 +12,21 @@ import { useAuth } from "../../hooks/useAuth";
 import { useTasks } from "../../hooks/useTasks";
 import { database } from "../../services/firebase";
 
+// i18m
+import { useTranslation } from "react-i18next";
+
 // Styles
 import styles from "./TaskList.module.scss";
 
 export function TaskList() {
+  const { t } = useTranslation();
+
   const { user } = useAuth();
+
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [newTask, setNewTask] = useState(false);
   const { task } = useTasks(newTask as boolean);
+
   const { globalTheme } = useContext(ThemeContext);
 
   async function handleCreateNewTask(event: FormEvent) {
@@ -66,16 +73,16 @@ export function TaskList() {
 
   return (
     <div className={styles.toDoList}>
-      <h1>To Do List</h1>
+      <h1>{t("To Do List")}</h1>
       <form onSubmit={handleCreateNewTask} className={styles.formTask}>
         <input
           type="text"
-          placeholder="Enter a new Task"
+          placeholder={t("Enter a new Task")}
           onChange={(e) => setNewTaskTitle(e.target.value)}
           value={newTaskTitle}
         />
         <button type="submit" autoFocus className={styles[globalTheme]}>
-          <span>Add Task</span>
+          <span>{t("Add Task")}</span>
           <FiCheck size={30} />
         </button>
       </form>

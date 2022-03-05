@@ -16,6 +16,9 @@ import levelBackground from "../../assets/images/level_background.svg";
 // Icons
 import { FiX } from "react-icons/fi";
 
+// i18n
+import { useTranslation } from "react-i18next";
+
 // Types
 type NewLevelModalProps = {
   isOpen: boolean;
@@ -23,6 +26,8 @@ type NewLevelModalProps = {
 };
 
 export function NewLevelModal({ isOpen, onRequestClose }: NewLevelModalProps) {
+  const { t } = useTranslation();
+
   const { level } = useContext(ChallengesContext);
   return (
     <Modal
@@ -40,12 +45,15 @@ export function NewLevelModal({ isOpen, onRequestClose }: NewLevelModalProps) {
         <h2>{level}</h2>
       </div>
       <div className="descriptionLevel">
-        <h2>Acredite em seu potencial</h2>
+        <h2>{t("Believe in your potential")}</h2>
         <p>
-          Você chegou finalmente do <b>nível {level}</b>
+          {t("You finally reached")}{" "}
+          <b>
+            {t("Level")} {level}!!
+          </b>
           <br />
-          Ainda tem muito caminho pela frente <br />
-          <b>NÃO DESISTA!!</b>
+          {t("There's still a long way to go")} <br />
+          <b>{t("DON'T GIVE UP")}!!</b>
         </p>
       </div>
     </Modal>

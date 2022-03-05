@@ -7,7 +7,12 @@ import "./styles.scss";
 // Hooks
 import { useUsers } from "../../hooks/useUsers";
 
+// i18n
+import { useTranslation } from "react-i18next";
+
 export function Table() {
+  const { t } = useTranslation();
+
   const { usersData } = useUsers();
   let positionNumber = 0;
 
@@ -16,10 +21,10 @@ export function Table() {
       <table>
         <thead>
           <tr>
-            <th className="position">Position</th>
-            <th className="user">Users</th>
-            <th className="challenge">Challenges</th>
-            <th className="xp">Experience</th>
+            <th className="position">{t("POSITION")}</th>
+            <th className="user">{t("USERS")}</th>
+            <th className="challenge">{t("CHALLENGES")}</th>
+            <th className="xp">{t("EXPERIENCE")}</th>
           </tr>
         </thead>
         <tbody>

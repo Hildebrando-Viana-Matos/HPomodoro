@@ -10,6 +10,9 @@ import levelImg from "../../assets/images/up.svg";
 // Styles
 import styles from "./CardUser.module.scss";
 
+// i18n
+import { useTranslation } from "react-i18next";
+
 // Types
 interface CardUserProps {
   position: number;
@@ -23,6 +26,8 @@ interface CardUserProps {
 }
 
 export function CardUser({ position, user }: CardUserProps) {
+  const { t } = useTranslation();
+
   const { globalTheme } = useContext(ThemeContext);
   return (
     <tr className={styles.card}>
@@ -32,20 +37,22 @@ export function CardUser({ position, user }: CardUserProps) {
           <img
             className={styles.imgProfile}
             src={user.avatar}
-            alt={`Foto de perfil ${user.name}`}
+            alt={`${user.name}`}
           />
           <div className={styles.profileUser}>
             <h2>{user.name}</h2>
             <div className={styles.contentLevel}>
               <img className={styles.up} src={levelImg} alt="Level Icon" />
-              <span>Level {user.level}</span>
+              <span>
+                {t("Level")} {user.level}
+              </span>
             </div>
           </div>
         </div>
       </td>
       <td className={styles.challenges}>
         <b className={styles[globalTheme]}>{user.challengesCompleted}</b>{" "}
-        completed
+        {t("completed")}
       </td>
       <td className={styles.xp}>
         <b className={styles[globalTheme]}>{user.xp}</b> xp

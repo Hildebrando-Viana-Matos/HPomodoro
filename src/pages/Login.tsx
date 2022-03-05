@@ -16,8 +16,14 @@ import logoHPomodoro from "../assets/images/logo.svg";
 // Components
 import { ButtonLogin } from "../components/ButtonLogin";
 
+// i18n
+import { useTranslation } from "react-i18next";
+
 export function Login() {
+  const { t } = useTranslation();
+
   const { user } = useContext(AuthContext);
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -31,25 +37,26 @@ export function Login() {
       <div className="banner">
         <div className="contentImgGrade">
           <img src={logoHPomodoro} alt="Logo HPomodoro" />
-          <p>Your focus platform for study and work!!</p>
+          <p>{t("Your focus platform for study and work!!")}</p>
         </div>
       </div>
       <div className="login">
         <div className="content">
-          <h2>Welcome</h2>
+          <h2>{t("Welcome")}</h2>
           <p>
-            Welcome to our platform to focus on studies, work and other
-            activities using the Pomodoro technique!
+            {t(
+              "Welcome to our platform to focus on studies, work and other activities using the Pomodoro technique!"
+            )}
           </p>
           <ButtonLogin
             platform="Google"
             color="#6C5CE7"
-            text="Login with Google"
+            text={t("Login with Google")}
           />
           <ButtonLogin
             platform="GitHub"
             color="#171515"
-            text="Login with GitHub"
+            text={t("Login with GitHub")}
           />
         </div>
       </div>

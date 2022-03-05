@@ -9,6 +9,9 @@ import "./styles/global.scss";
 // Firebase
 import "./services/firebase";
 
+// i18n
+import "./i18n";
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
