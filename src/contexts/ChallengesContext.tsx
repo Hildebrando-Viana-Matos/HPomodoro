@@ -1,6 +1,9 @@
 // React
 import { createContext, useState, ReactNode, useEffect } from "react";
 
+// i18n
+import { useTranslation } from "react-i18next";
+
 // Modals
 import { NewChallengeModal } from "../components/NewChallengeModal";
 import { NewLevelModal } from "../components/NewLevelModal";
@@ -13,7 +16,7 @@ import { useUser } from "../hooks/useUser";
 import { database } from "../services/firebase";
 
 type Challenge = {
-  language: "ptBr" | "en";
+  language: "ptBr" | "enUs";
   type: "body" | "eye";
   description: string;
   amount: number;
@@ -41,6 +44,8 @@ export const ChallengesContext = createContext({} as ChallengesContextData);
 export function ChallengesProvider({ children }: ChallengesProviderProps) {
   const { user } = useAuth();
   const { userData, setUserData } = useUser();
+
+  const { t } = useTranslation();
 
   const [challenges, setChallenges] = useState<Challenge[]>([]);
 
@@ -91,13 +96,23 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
 
   // Catching json data
   useEffect(() => {
-    fetch("./challenges.json", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => setChallenges(res as Challenge[]));
+    if (navigator.language === "pt-BR") {
+      fetch("./json/challenges_ptBr.json", {
+        headers: {
+          Accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => setChallenges(res as Challenge[]));
+    } else {
+      fetch("./json/challenges_enUs.json", {
+        headers: {
+          Accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => setChallenges(res as Challenge[]));
+    }
   }, []);
 
   useEffect(() => {
@@ -133,8 +148,8 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     new Audio("/sounds/notification.mp3").play();
 
     if (Notification.permission === "granted") {
-      new Notification("Novo desafio 🔥", {
-        body: `Valendo ${challenge.amount}XP!`,
+      new Notification(`${t("New Challenge")} 🤘😉`, {
+        body: `${t("Worth")} ${challenge.amount}XP!`,
       });
     }
   }
