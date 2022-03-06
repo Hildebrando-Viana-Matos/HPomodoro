@@ -116,7 +116,9 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
   }, []);
 
   useEffect(() => {
-    handleRegisterNewLevel();
+    if (challengeWasCompleted) {
+      handleRegisterNewLevel();
+    }
   }, [challengeWasCompleted]);
 
   function levelUp() {
@@ -177,32 +179,18 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
   }
 
   async function handleRegisterNewLevel() {
-    if (userData?.id) {
-      const newLevelUser = {
-        id: user?.id,
-        name: user?.name,
-        avatar: user?.avatar,
-        levelUser: level,
-        currentExperienceUser: currentExperience,
-        challengesCompletedUser: challengesCompleted,
-      };
+    const newLevelUser = {
+      id: user?.id,
+      name: user?.name,
+      avatar: user?.avatar,
+      levelUser: level,
+      currentExperienceUser: currentExperience,
+      challengesCompletedUser: challengesCompleted,
+    };
 
-      await database.ref(`users/${user?.id}/`).update(newLevelUser);
+    await database.ref(`users/${user?.id}/`).update(newLevelUser);
 
-      setUserData(newLevelUser as any);
-    } else if (!userData?.id) {
-      // Registering new user data
-      const newLevelUser = {
-        id: user?.id,
-        name: user?.name,
-        avatar: user?.avatar,
-        levelUser: level,
-        currentExperienceUser: currentExperience,
-        challengesCompletedUser: challengesCompleted,
-      };
-
-      await database.ref(`users/${user?.id}/`).update(newLevelUser);
-    }
+    setUserData(newLevelUser as any);
   }
 
   return (
