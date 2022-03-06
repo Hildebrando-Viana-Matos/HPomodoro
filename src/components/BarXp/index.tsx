@@ -24,6 +24,12 @@ export function BarXp() {
           style={{ width: `${percentToNextLevel}%` }}
           className={`${styles.ocupBar} ${styles[globalTheme]}`}
         ></div>
+        <span
+          className={styles.currentExperience}
+          style={{ left: `${percentToNextLevel}%` }}
+        >
+          {currentExperience}xp
+        </span>
       </div>
       <span>{experienceToNextLevel} xp</span>
     </div>

@@ -27,5 +27,12 @@
       border-radius: 5px;
       z-index: 999;
     }
+
+    span.currentExperience {
+      width: auto;
+      position: absolute;
+      top: 12px;
+      transform: translateX(-50%);
+    }
   }
 }
