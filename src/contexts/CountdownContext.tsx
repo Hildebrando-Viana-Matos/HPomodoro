@@ -42,7 +42,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   const [timeState, setTimeState] = useState<string>("pomodoro");
   const [repeatedTimes, setRepeatedTimes] = useState<number>(1);
 
-  const [time, setTime] = useState(0.1 * 60);
+  const [time, setTime] = useState(25 * 60);
 
   const [isActive, setIsActive] = useState(false);
 
@@ -65,17 +65,17 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   }
 
   function startPomodoro() {
-    setTime(0.1 * 60);
+    setTime(25 * 60);
     setIsActive(true);
   }
 
   function startShortBreak() {
-    setTime(0.2 * 60);
+    setTime(5 * 60);
     setIsActive(true);
   }
 
   function startLongBreak() {
-    setTime(0.3 * 60);
+    setTime(15 * 60);
     setIsActive(true);
   }
 
@@ -86,7 +86,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     if (globalTheme === "pomodoro") {
       setTimeState(globalTheme);
       setGlobalTheme(globalTheme);
-      setTime(0.1 * 60);
+      setTime(25 * 60);
     } else if (globalTheme === "shortBreak") {
       setTimeState(globalTheme);
       setGlobalTheme(globalTheme);
@@ -94,7 +94,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     } else if (globalTheme === "longBreak") {
       setTimeState(globalTheme);
       setGlobalTheme(globalTheme);
-      setTime(0.3 * 60);
+      setTime(15 * 60);
     }
   }
 
@@ -153,15 +153,15 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
     if (globalTheme === "pomodoro") {
       clearTimeout(countdownTimeout);
-      setTime(0.1 * 60);
+      setTime(25 * 60);
       setIsActive(false);
     } else if (globalTheme === "shortBreak") {
       clearTimeout(countdownTimeout);
-      setTime(0.2 * 60);
+      setTime(5 * 60);
       setIsActive(false);
     } else if (globalTheme === "longBreak") {
       clearTimeout(countdownTimeout);
-      setTime(0.3 * 60);
+      setTime(15 * 60);
       setIsActive(false);
     }
   }, [globalTheme]);
