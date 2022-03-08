@@ -27,7 +27,7 @@ interface ChallengesContextData {
   currentExperience: number;
   experienceToNextLevel: number;
   challengesCompleted: number;
-  activeChallenge: any;
+  activeChallenge: Challenge | undefined;
   levelUp: () => void;
   closeLevelUpModal: () => void;
   startNewChallenge: () => void;
@@ -82,7 +82,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     userData?.challengesCompletedUser,
   ]);
 
-  const [activeChallenge, setActiveChallenge] = useState(null);
+  const [activeChallenge, setActiveChallenge] = useState<Challenge>();
   const [isNewChallengeOpen, setIsNewChallengeOpen] = useState(false);
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false);
   const [challengeWasCompleted, setChallengeWasCompleted] = useState(false);
@@ -145,7 +145,8 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
     const challenge = challenges[randomChallengeIndex];
 
-    setActiveChallenge(challenge as any);
+    setActiveChallenge(challenge as Challenge);
+    console.log(activeChallenge, challenge);
 
     new Audio("/sounds/notification.mp3").play();
 
@@ -157,7 +158,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
   }
 
   function resetChallenge() {
-    setActiveChallenge(null);
+    setActiveChallenge(undefined);
     handleCloseNewChallenge();
   }
 

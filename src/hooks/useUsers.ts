@@ -36,8 +36,8 @@ export function useUsers() {
       .ref(`users/`)
       .orderByChild(`currentExperienceUser`);
 
-    usersRef.on("value", (tasks) => {
-      const databaseTasks = tasks.val();
+    usersRef.on("value", (user) => {
+      const databaseTasks = user.val();
       const firebaseTask: FirebaseUsersData =
         databaseTasks ?? console.log("deu ruim");
 
