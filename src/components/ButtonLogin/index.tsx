@@ -11,14 +11,14 @@ import { useAuth } from "../../hooks/useAuth";
 type ButtonLoginProps = {
   platform?: "GitHub" | "Google";
   color: string;
-  text: any;
+  text: string;
 };
 
 export function ButtonLogin(props: ButtonLoginProps) {
   // Importando valores de um contexto
   const { user, signInWithGoogle, signInWithGitHub } = useAuth();
 
-  async function handleLogin(platform: any) {
+  async function handleLogin(platform: string) {
     if (platform === "Google") {
       if (!user) {
         await signInWithGoogle();
@@ -32,7 +32,7 @@ export function ButtonLogin(props: ButtonLoginProps) {
     <button
       className="authButton"
       style={{ color: props.color }}
-      onClick={() => handleLogin(props.platform)}
+      onClick={() => handleLogin(props.platform as string)}
     >
       {props.platform === "GitHub" && <FiGithub size={30} />}
       {props.platform === "Google" && <FaGoogle size={30} />}

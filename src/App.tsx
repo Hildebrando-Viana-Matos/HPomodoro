@@ -9,22 +9,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Pages
 import { Clock } from "./pages/Clock";
 import { Login } from "./pages/Login";
-import { Ranking } from "./pages/Ranking";
+
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   return (
     <ThemeContextParent>
-      <BrowserRouter>
-        <AuthContextProvider>
-          <ChallengesProvider>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/pomodoro" element={<Clock />} />
-              <Route path="/ranking" element={<Ranking />} />
-            </Routes>
-          </ChallengesProvider>
-        </AuthContextProvider>
-      </BrowserRouter>
+      <HelmetProvider>
+        <BrowserRouter>
+          <AuthContextProvider>
+            <ChallengesProvider>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/pomodoro" element={<Clock />} />
+              </Routes>
+            </ChallengesProvider>
+          </AuthContextProvider>
+        </BrowserRouter>
+      </HelmetProvider>
     </ThemeContextParent>
   );
 }

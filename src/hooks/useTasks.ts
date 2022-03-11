@@ -7,7 +7,7 @@ import { useAuth } from "./useAuth";
 import { database } from "../services/firebase";
 
 type Task = {
-  id: number;
+  id: string;
   title: string;
   isComplete: boolean;
 };
@@ -15,7 +15,7 @@ type Task = {
 type FirebaseTask = Record<
   string,
   {
-    id: number;
+    id: string;
     title: string;
     isComplete: boolean;
   }
@@ -39,7 +39,7 @@ export function useTasks(taskTitle: boolean) {
           isComplete: value.isComplete,
         };
       });
-      setTask(parsedTask as any);
+      setTask(parsedTask as Task[]);
     });
 
     return () => {

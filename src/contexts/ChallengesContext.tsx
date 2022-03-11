@@ -39,6 +39,15 @@ interface ChallengesProviderProps {
   children: ReactNode;
 }
 
+type UsersData = {
+  id: string;
+  name: string;
+  avatar: string;
+  levelUser: number;
+  currentExperienceUser: number;
+  challengesCompletedUser: number;
+};
+
 export const ChallengesContext = createContext({} as ChallengesContextData);
 
 export function ChallengesProvider({ children }: ChallengesProviderProps) {
@@ -77,6 +86,8 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
         : userData?.challengesCompletedUser
     );
   }, [
+    user,
+    userData,
     userData?.levelUser,
     userData?.currentExperienceUser,
     userData?.challengesCompletedUser,
@@ -146,7 +157,6 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     const challenge = challenges[randomChallengeIndex];
 
     setActiveChallenge(challenge as Challenge);
-    console.log(activeChallenge, challenge);
 
     new Audio("/sounds/notification.mp3").play();
 
@@ -191,7 +201,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
 
     await database.ref(`users/${user?.id}/`).update(newLevelUser);
 
-    setUserData(newLevelUser as any);
+    setUserData(newLevelUser as UsersData);
   }
 
   return (

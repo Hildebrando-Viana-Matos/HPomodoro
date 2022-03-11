@@ -28,17 +28,16 @@ export function useUser() {
         .get()
         .then((userFromFirebase) => {
           if (userFromFirebase.exists()) {
+            const data = userFromFirebase.val();
             const parsedUsers = {
-              id: userFromFirebase.val().id,
-              name: userFromFirebase.val().name,
-              avatar: userFromFirebase.val().avatar,
-              levelUser: userFromFirebase.val().levelUser,
-              currentExperienceUser:
-                userFromFirebase.val().currentExperienceUser,
-              challengesCompletedUser:
-                userFromFirebase.val().challengesCompletedUser,
+              id: data.id,
+              name: data.name,
+              avatar: data.avatar,
+              levelUser: data.levelUser,
+              currentExperienceUser: data.currentExperienceUser,
+              challengesCompletedUser: data.challengesCompletedUser,
             };
-            setUserData(parsedUsers as any);
+            setUserData(parsedUsers as UserData);
           } else {
             return;
           }

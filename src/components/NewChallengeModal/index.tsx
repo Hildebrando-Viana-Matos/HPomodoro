@@ -24,7 +24,7 @@ import { useTranslation } from "react-i18next";
 
 // Types
 type Challenge = {
-  language: "ptBr" | "en";
+  language: "ptBr" | "enUs";
   type: "body" | "eye";
   description: string;
   amount: number;
@@ -34,7 +34,7 @@ type NewChallengeModalProps = {
   isOpen: boolean;
   onRequestClose: () => void;
   completeChallenge: () => void;
-  content: Challenge | any;
+  content: Challenge | undefined;
 };
 
 export function NewChallengeModal({
@@ -71,10 +71,10 @@ export function NewChallengeModal({
       <img src={GokuImage} alt="Goku Challenge" />
       <h2 className={styles.title}>{t("New Challenge")}</h2>
       <p className={styles[globalTheme]}>
-        {t("Worth")} {content.amount}xp
+        {t("Worth")} {content?.amount}xp
       </p>
       <span className={styles.challengeDescription}>
-        {t("Let's go")} {user?.name}!!! {content.description}
+        {t("Let's go")} {user?.name}!!! {content?.description}
       </span>
 
       <div className={styles.buttonsContainer}>

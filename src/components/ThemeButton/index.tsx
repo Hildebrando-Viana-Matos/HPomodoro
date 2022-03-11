@@ -26,6 +26,8 @@ export function ThemeButton() {
   }
 
   function handleChangeTimeState(stateName: string) {
+    new Audio("/sounds/newTime.mp3").play();
+
     if (stateName === "pomodoro") {
       setGlobalTheme(POMODORO_THEME);
     } else if (stateName === "shortBreak") {
@@ -35,7 +37,6 @@ export function ThemeButton() {
     } else {
       return;
     }
-    new Audio("/newTime.mp3").play();
   }
   return (
     <div className={styles.changeClockState}>

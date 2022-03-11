@@ -18,6 +18,13 @@ import { useTranslation } from "react-i18next";
 // Styles
 import styles from "./TaskList.module.scss";
 
+// Types
+type Task = {
+  id: string;
+  title: string;
+  isComplete: boolean;
+};
+
 export function TaskList() {
   const { t } = useTranslation();
 
@@ -41,7 +48,7 @@ export function TaskList() {
     }
 
     const newTask = {
-      id: Math.random(),
+      id: Math.random().toString(),
       title: newTaskTitle,
       isComplete: false,
     };
@@ -51,7 +58,7 @@ export function TaskList() {
     setNewTask(false);
   }
 
-  async function handleToggleTaskCompletion(taskSingle: any) {
+  async function handleToggleTaskCompletion(taskSingle: Task) {
     if (!taskSingle.isComplete) {
       await database.ref(`users/${user?.id}/tasks/${taskSingle.id}`).update({
         id: taskSingle.id,
@@ -67,7 +74,7 @@ export function TaskList() {
     }
   }
 
-  async function handleRemoveTask(id: number) {
+  async function handleRemoveTask(id: string) {
     await database.ref(`users/${user?.id}/tasks/${id}`).remove();
   }
 
@@ -101,9 +108,7 @@ export function TaskList() {
                     type="checkbox"
                     readOnly
                     checked={taskSingle.isComplete}
-                    onClick={() =>
-                      handleToggleTaskCompletion(taskSingle as any)
-                    }
+                    onClick={() => handleToggleTaskCompletion(taskSingle)}
                   />
                   <span
                     className={`${styles.checkmark} ${styles[globalTheme]}`}

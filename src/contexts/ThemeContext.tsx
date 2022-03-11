@@ -6,7 +6,7 @@ export const LONG_BREAK_THEME = "longBreak";
 
 type ThemeContextProps = {
   globalTheme: string;
-  setGlobalTheme: any;
+  setGlobalTheme: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type ThemeContextProviderProps = {

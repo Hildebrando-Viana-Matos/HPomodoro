@@ -22,7 +22,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useTranslation } from "react-i18next";
 
 // Helmet
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export function ClockAndProfile() {
   const { t } = useTranslation();

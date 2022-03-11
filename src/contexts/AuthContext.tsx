@@ -95,7 +95,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         name: displayName,
         avatar: photoURL,
       });
-      console.log(user);
 
       navigate("pomodoro", { replace: true });
     } else {

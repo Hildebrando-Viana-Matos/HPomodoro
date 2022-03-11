@@ -2,7 +2,7 @@
 import { useContext } from "react";
 
 // React Router Dom
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Icons
 import { FiAward, FiHome, FiLogOut } from "react-icons/fi";
@@ -21,13 +21,9 @@ export function Header() {
   const { globalTheme } = useContext(ThemeContext);
   const { user, signOut } = useContext(AuthContext);
 
-  let navigate = useNavigate();
-
   async function handleSignOut() {
     if (user) {
       await signOut();
-
-      navigate("", { replace: true });
     }
   }
 
@@ -38,9 +34,6 @@ export function Header() {
       <div className={styles.menu}>
         <Link to="/pomodoro">
           <FiHome size={30} />
-        </Link>
-        <Link to="/ranking">
-          <FiAward size={30} />
         </Link>
       </div>
 
