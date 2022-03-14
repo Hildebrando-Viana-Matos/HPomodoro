@@ -41,7 +41,7 @@
 I used some web technologies in order to train:mortar_board::
 
 - ReactJs
-- JavaScript
+- TypeScript
 - Sass
 - React Icons
 - React Router Dom
